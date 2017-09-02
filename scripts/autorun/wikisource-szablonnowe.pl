@@ -72,6 +72,7 @@ sub message {
         } else {
             $sns = '';
             $ssubpage = $spage;
+            print $handle "SNW: page:$spage;sur:$suser,sec:$ssection,sum:$ssummary\n";
             return
         }
 
@@ -80,13 +81,13 @@ sub message {
         } else {
             $stable = '';
         }
-        print $handle " sns:$sns, subpage:$ssubpage, tbl:$stable\n";
+        #print $handle " sns:$sns, subpage:$ssubpage, tbl:$stable\n";
 
         if ( $ssubpage !~ /^Nowe/ ) {
             close $handle;
             return
         } else {
-            print $handle "SKR: page:$spage;sur:$suser,sec:$ssection,sum:$ssummary\n";
+            print $handle "SNW: page:$spage;sur:$suser,sec:$ssection,sum:$ssummary\n";
         }
         close $handle;
      
@@ -110,10 +111,10 @@ sub message {
         $msg1 = $msg1 . "$ssubpage" unless $ssubpage !~ /.+/ ;
         $msg1 = $msg1 . "/$stable" unless $stable !~ /.+/;
         $msg1 = $msg1 . "}}";
-        if ($ssummary =~ /.+/) {$msg1 = $msg1 . " z opisem zmian:$ssummary"}
+        if ($ssummary =~ /.+/) {$msg1 = $msg1 . " z opisem zmian: $ssummary"}
         else {$msg1 = $msg1 . " bez opisu zmian"};
 
-        print $handle "SKR msg1:$msg1\n";
+        print $handle "SNW msg1:$msg1\n";
 
         $outserver->command("$msg1");
         $outserver->command("MSG $mychan $sdiff");
