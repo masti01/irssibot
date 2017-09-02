@@ -57,7 +57,7 @@ sub message {
            /^.14\[\[.07(.+?).14\]\].4 (.*).10 .02(.+?). .5\*. .03(.+?). .5\*. \(([+-]?\d+?)\) .10(\/\*.*\*\/)?(.*)./;
 
         # logging
-        open(my $handle, '>>', "$ENV{HOME}/.irssi/test.log") or die "Fatal: $!";
+        open(my $handle, '>>', "$ENV{HOME}/.irssi/szablonnowe.log") or die "Fatal: $!";
         print $handle "msg:$msg\n";
 
         #my ( $sns, $ssubpage, $stable) = $spage =~ m{(.*?):(.*?)\/(.*)};
@@ -67,11 +67,12 @@ sub message {
 
         
         #my ( $sns, $ssubpage, $stable) = $spage =~ m{(.*?):(.*?)\/(.*)};
-        if ( $spage =~ /.*Szablon:.*/) {
+        if ( $spage =~ /^Szablon:Nowe.*/) {
             ($sns , $ssubpage) = $spage =~ /(.*):(.*)/;
         } else {
             $sns = '';
             $ssubpage = $spage;
+            return
         }
 
         if ($ssubpage =~ m{(.*)\/(.*)}) {
@@ -79,9 +80,9 @@ sub message {
         } else {
             $stable = '';
         }
-        print $handle "SKR sns:$sns, subpage:$ssubpage, tbl:$stable\n";
+        print $handle " sns:$sns, subpage:$ssubpage, tbl:$stable\n";
 
-        if ( $ssubpage !~ /Nowe/ ) {
+        if ( $ssubpage !~ /^Nowe/ ) {
             close $handle;
             return
         } else {
