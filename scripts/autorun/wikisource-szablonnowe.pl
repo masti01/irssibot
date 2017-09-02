@@ -106,7 +106,7 @@ sub message {
 
         # combine response based on sections
         my $msg1 = "MSG $mychan $suser $m1 w szablonie {{";
-        $msg1 = $msg1 . ":$ssubpage" unless $ssubpage !~ /.+/ ;
+        $msg1 = $msg1 . "$ssubpage" unless $ssubpage !~ /.+/ ;
         $msg1 = $msg1 . "/$stable" unless $stable !~ /.+/;
         $msg1 = $msg1 . "}}";
         if ($ssummary =~ /.+/) {$msg1 = $msg1 . " z opisem zmian:$ssummary"}
