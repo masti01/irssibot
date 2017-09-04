@@ -25,6 +25,11 @@ $wiki_channels{'#mst'} = {
 	'lang'    => 'pl',
 };
 
+$wiki_channels{'#wikipedia-pl'} = {
+        'project' => 'wikipedia',
+        'lang'    => 'pl',
+};
+
 $wiki_channels{'#cvn-wp-pl'} = {
 	'project' => 'wikipedia',
 	'lang'    => 'pl',
